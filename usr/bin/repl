@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Intallation:
+# Add this to $HOME/.lein/profiles.clj
+# :user {:dependencies [[com.bhauman/rebel-readline "0.1.4"]]}
+
+if test -f "project.clj"; then
+	lein trampoline run -m rebel-readline.main
+else
+	clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main
+fi
+
