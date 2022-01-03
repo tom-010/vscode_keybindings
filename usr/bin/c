@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# pip3 install Pygments
+
+if [ "-s" == "$1" ]; then
+	pygmentize -g $2 | perl -e 'print ++$i." $_" for <>'  | less -R
+else
+	pygmentize -g $1 | perl -e 'print ++$i." $_" for <>'
+fi
+
