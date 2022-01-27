@@ -127,3 +127,9 @@ export PATH=$PATH:$GOROOT/bin
 
 alias sm="emacs -nw"
 
+#source "/home/tom/lib/emsdk/emsdk_env.sh"
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+alias md=ghostwriter
+source ~/.bash-powerline.sh
