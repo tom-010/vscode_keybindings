@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+cd /home/tom/bin/tla/toolbox/
+nohup ./toolbox 2> /dev/null > /dev/null &

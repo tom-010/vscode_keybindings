@@ -133,3 +133,10 @@ alias sm="emacs -nw"
 . $HOME/.asdf/completions/asdf.bash
 alias md=ghostwriter
 source ~/.bash-powerline.sh
+
+
+# antlr
+export CLASSPATH=".:/usr/local/lib/antlr.jar:$CLASSPATH"
+alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "/usr/local/lib/antlr.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+alias split=tmux
