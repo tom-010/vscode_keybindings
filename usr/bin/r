@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nohup xfce4-appfinder > /dev/null 2> /dev/null &
+
