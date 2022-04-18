@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export GTK_THEME=Adwaita
+
+cd ~
+
+nohup ~/bin/dsl-2022-03/eclipse/eclipse 2> /dev/null > /dev/null &
+
