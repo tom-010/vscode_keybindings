@@ -9,38 +9,48 @@ import datetime
 
 
 
+
 mode = 'small'
+headline = 'countdown'
+n_countdowns = 1
 
 def main():
     start = datetime.datetime.now()
-    remaining = get_duration()
-    while remaining > 0:
-        print_seconds(remaining)
-        if remaining <= 3 and remaining > 0:
-            beep()
-        try:
-            sleep(1.0-(datetime.datetime.now()-start).microseconds / 1000000)
-            start = datetime.datetime.now()
-        except KeyboardInterrupt:
-            print_seconds(remaining, end='\n', prefix='')
-            exit(0)
-        remaining -= 1
-    print_seconds(remaining, end='\n', prefix='')
-    beep(1000)
+    durations = get_durations()
+    n_countdowns = len(durations)
+    
+    for current_countdown, remaining in enumerate(durations):
+        if n_countdowns > 1:
+            global headline
+            headline = f'countdown {current_countdown+1}/{n_countdowns}'
+        while remaining > 0:
+            print_seconds(remaining)
+            if remaining <= 3 and remaining > 0:
+                beep()
+            try:
+                sleep(1.0-(datetime.datetime.now()-start).microseconds / 1000000)
+                start = datetime.datetime.now()
+            except KeyboardInterrupt:
+                print_seconds(remaining, end='\n')
+                exit(0)
+            remaining -= 1
+        print_seconds(remaining, end='\n')
+        beep(1000)
     
 
 def print_seconds(seconds, prefix=' ', end='\r'):
     if mode == 'big':
         os.system('clear')
         print(to_ascii(seconds_to_label(seconds)))
+        print(headline)
     else:
         print('                                      ', end='\r')
-        print(prefix+'countdown: ' +seconds_to_label(seconds), end=end)
+        print(prefix+headline+': ' +seconds_to_label(seconds), end=end)
 
 
-def get_duration():
+def get_durations():
     parser = argparse.ArgumentParser(description='Countdown')
-    parser.add_argument('time', type=str, help='time to coundown from. e.g. `10` is 10 seconds, `1:10` is one minute, 10 seconds, `2:1:10` is two hours one minute, 10 seconds')
+    parser.add_argument('durations', nargs='+', type=str, help='time to coundown from. e.g. `10` is 10 seconds, `1:10` is one minute, 10 seconds, `2:1:10` is two hours one minute, 10 seconds')
     parser.add_argument('-b', '--big', action='store_true', help='Show the time in big font')
     args = parser.parse_args()
     if args.big:
@@ -49,15 +59,18 @@ def get_duration():
     def clean_part(p):
         p = re.sub('[^0-9]','', p) # deltee all non-numeric stuff
         return int(p)
-    parts = [clean_part(p) for p in args.time.split(':')]
-    if len(parts) == 1:
-        return parts[0]
-    if len(parts) == 2:
-        return parts[0] * 60 + parts[1]
-    if len(parts) == 3:
-        return parts[0] * 60*60 + parts[1] * 60 + parts[0]
-    print('could not parse time')
-    exit(1)
+
+    def time_to_seconds(time):
+        parts = [clean_part(p) for p in time.split(':')]
+        if len(parts) == 1:
+            return parts[0]
+        if len(parts) == 2:
+            return parts[0] * 60 + parts[1]
+        if len(parts) == 3:
+            return parts[0] * 60*60 + parts[1] * 60 + parts[0]
+        print('could not parse time')
+        exit(1)
+    return [time_to_seconds(t) for t in args.durations]
 
 def seconds_to_label(s):
     if s < 60:
@@ -75,7 +88,7 @@ def seconds_to_label(s):
         return f'{hours}:{minutes}:{seconds} h'
 
 def beep(ms=100):
-    os.system(f'beep -l {ms}') # sudo apt install sox && sudo modprobe -v pcspkr
+    os.system(f'beep -l {ms} &') # sudo apt install sox && sudo modprobe -v pcspkr
 
 
 
