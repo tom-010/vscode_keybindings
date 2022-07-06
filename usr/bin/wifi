@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    nmcli d wifi list
+  else
+    nmcli c up "$1"
+fi
+
