@@ -88,8 +88,7 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 10%- unmute"), desc="lower volume"),
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10"), desc="brightness up"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10"), desc="brightness down"),
-
-    # xbacklight -inc 10 
+    Key([], "XF86Calculator", lazy.spawn('xfce4-terminal -x "calc"'), desc="calculator"),
     # https://github.com/qtile/qtile/blob/master/libqtile/backend/x11/xkeysyms.py
 ]
 

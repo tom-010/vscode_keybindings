@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ipython --no-banner --no-confirm-exit -i -c "import numpy as np; from math import *; import matplotlib.pyplot as plt"
