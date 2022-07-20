@@ -79,9 +79,18 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    #Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawn(["ulauncher"]), desc="run ulauncher"),
     Key([group_mod], "h", lazy.screen.prev_group(), desc="switch to the previous group"),
     Key([group_mod], "l", lazy.screen.next_group(), desc="swith to the next group"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle"), desc="toggle mute"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 10%+ unmute"), desc="raise volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 10%- unmute"), desc="lower volume"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10"), desc="brightness up"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10"), desc="brightness down"),
+
+    # xbacklight -inc 10 
+    # https://github.com/qtile/qtile/blob/master/libqtile/backend/x11/xkeysyms.py
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -139,7 +148,7 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.CurrentLayout(),
+                #widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
@@ -156,8 +165,11 @@ screens = [
                 #widget.Systray(),
                 #widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 # widget.QuickExit(),
+                widget.Battery(format='{percent:2.0%}', low_foreground='FF0000', low_percentage=0.2),
+                widget.TextBox('V:'),
+                widget.Volume(device='pulse') # https://docs.qtile.org/en/latest/_modules/libqtile/widget/volume.html
             ],
-            24,
+            12,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
