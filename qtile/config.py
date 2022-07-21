@@ -89,6 +89,7 @@ keys = [
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10"), desc="brightness up"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10"), desc="brightness down"),
     Key([], "XF86Calculator", lazy.spawn('xfce4-terminal -x "calc"'), desc="calculator"),
+    Key([mod], "n", lazy.spawn('xfce4-terminal -x "note"'), desc="add note"),
     # https://github.com/qtile/qtile/blob/master/libqtile/backend/x11/xkeysyms.py
 ]
 

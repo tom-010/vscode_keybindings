@@ -1,4 +1,34 @@
-#!/bin/bash
+#!/usr/bin/python3 
 
-nohup logseq ${@:1} > /dev/null &> /dev/null &
+import argparse
+from datetime import datetime
+from pathlib import Path
+import sys, tempfile, os
+from subprocess import call
 
+def new_filename():
+    now = datetime.now()
+    res = now.strftime("%Y-%m-%d_%H-%M-%S")
+    file_suffix = ".md"
+    res += file_suffix
+    return res
+
+def new_file_path():
+    now = datetime.now()
+    date_part = now.strftime("%Y/%m/%d")
+    res = 'notes/' + date_part
+    res = Path.home().joinpath(res)
+    res.mkdir(parents=True, exist_ok=True)
+    res = res.joinpath(new_filename())
+    res = res.absolute()
+    return res
+
+def open_editor(path):
+    EDITOR = os.environ.get('EDITOR','vim') 
+    call([EDITOR, str(path)])
+
+def main():
+    path = new_file_path()
+    open_editor(path)
+
+main()
