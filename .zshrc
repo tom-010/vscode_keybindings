@@ -111,3 +111,4 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 export GEN_GENERATORS='/home/tom/generators'
 export GEN_GENERATORS='/home/tom/generators'
 alias v="nvim"
+alias files="thunar"

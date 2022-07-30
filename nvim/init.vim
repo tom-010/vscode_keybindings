@@ -25,6 +25,16 @@ nnoremap <Space>s :split<CR>
 nnoremap <Space>v :vsplit<CR>
 nnoremap <Space>t :split<CR>:resize 10<CR>:Terminal bash<CR>
 nnoremap <Space>T :TerminalVSplit bash<CR>
+nnoremap J <C-D>
+nnoremap K <C-U>
+
+
+"""""""
+" => Go stuff
+nnoremap <F5> :!!<CR>
+nnoremap <F2> :GoRename<CR>
+nnoremap <F12> gd
+""""""""
 
 "=============================
 " Plugins 
@@ -45,9 +55,12 @@ Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
 "Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
+Plug 'fatih/vim-go'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 call plug#end()
 
-:colorscheme jellybeans
+colorscheme PaperColor " jellybeans
+set background=light
 
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
