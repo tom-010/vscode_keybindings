@@ -62,7 +62,9 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod], "i", lazy.layout.grow(), desc="Grow layout away from the border"),
+    Key([mod], "m", lazy.layout.shrink(), desc="Shrink layout towards the border"),
+    Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -90,6 +92,7 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10"), desc="brightness down"),
     Key([], "XF86Calculator", lazy.spawn('xfce4-terminal -x "calc"'), desc="calculator"),
     Key([mod], "n", lazy.spawn('xfce4-terminal -x "note"'), desc="add note"),
+    Key([group_mod], "Return", lazy.spawn('chrome'), desc='chrome'),
     # https://github.com/qtile/qtile/blob/master/libqtile/backend/x11/xkeysyms.py
 ]
 
@@ -129,7 +132,7 @@ layouts = [
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadTall(),
-    # layout.MonadWide(),
+    layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
@@ -185,7 +188,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False 
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
