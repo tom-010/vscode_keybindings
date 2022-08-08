@@ -5,7 +5,7 @@
 :set shiftwidth=4
 :set smarttab
 :set softtabstop=4
-:set mouse=nicr " a
+:set mouse=a "nicr " a
 
 
 imap kj <Esc> 
@@ -25,8 +25,14 @@ nnoremap <Space>s :split<CR>
 nnoremap <Space>v :vsplit<CR>
 nnoremap <Space>t :split<CR>:resize 10<CR>:Terminal bash<CR>
 nnoremap <Space>T :TerminalVSplit bash<CR>
-nnoremap J <C-D>
-nnoremap K <C-U>
+nnoremap <S-J> }j
+nnoremap <S-K> {k
+
+"TODO: work on this. It does not work:
+"nnoremap <S-C-H><
+"nnoremap <S-C-L>\>
+"nnoremap <S-C-J>-
+"nnoremap <S-C-K>+
 
 
 """""""
@@ -57,6 +63,9 @@ Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
 "Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
 Plug 'fatih/vim-go'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
 colorscheme PaperColor " jellybeans
